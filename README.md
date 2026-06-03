@@ -65,13 +65,12 @@ keystore2.jks          (app2key)   ← lineage_app2.bin records the ancestor→n
 
 ## Prerequisites
 
-Add `adb` and `apksigner` to your `PATH` before running any commands.
+Add `adb` to your `PATH` before running any commands.
 
 ```bash
 # Add to ~/.zshrc or ~/.bashrc
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/platform-tools        # adb
-export PATH=$PATH:$ANDROID_HOME/build-tools/<version> # apksigner
 ```
 
 Replace `<version>` with the build-tools version installed on your machine (e.g. `35.0.0`).
