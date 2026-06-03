@@ -14,3 +14,4 @@
 .externalNativeBuild
 .cxx
 setup_signing.sh
+local.properties

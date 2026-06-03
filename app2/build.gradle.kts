@@ -77,14 +77,8 @@ listOf("debug", "release").forEach { variant ->
                 require(code == 0) { "${args[0]} exited with $code" }
             }
 
-            val props = Properties()
-            rootProject.file("local.properties").inputStream().use { props.load(it) }
-            val sdkDir = props.getProperty("sdk.dir")
-            val apksigner = File("$sdkDir/build-tools")
-                .listFiles()!!.sortedBy { it.name }.last().absolutePath + "/apksigner"
-
             run(
-                apksigner, "sign",
+                "apksigner", "sign",
                 "--ks", rootProject.file("keystore_ancestor.jks").absolutePath,
                 "--ks-key-alias", "ancestorkey",
                 "--ks-pass", "pass:ancestorpass",
@@ -104,10 +98,7 @@ listOf("debug", "release").forEach { variant ->
         tasks.named("install$variantCapitalized") {
             dependsOn("sign${variantCapitalized}WithLineage")
             doLast {
-                val props = Properties()
-                rootProject.file("local.properties").inputStream().use { props.load(it) }
-                val adb = "${props.getProperty("sdk.dir")}/platform-tools/adb"
-                ProcessBuilder(adb, "shell", "am", "start", "-n", "io.github.mtkw0127.app2/.MainActivity")
+                ProcessBuilder("adb", "shell", "am", "start", "-n", "io.github.mtkw0127.app2/.MainActivity")
                     .inheritIO().start().waitFor()
             }
         }
