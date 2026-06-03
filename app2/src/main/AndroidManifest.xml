@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!--
+        A custom signature-level permission declared by App2.
+        Only apps signed with the same certificate can be granted this permission.
+    -->
+    <permission
+        android:name="io.github.mtkw0127.permission.CUSTOM_PERMISSION"
+        android:protectionLevel="signature" />
+
+    <!--
+        Requests use of the signature permission declared by App1.
+        Since App2 and App1 have different signing certificates, this permission will not be granted at runtime.
+    -->
+    <uses-permission android:name="io.github.mtkw0127.permission.CUSTOM_PERMISSION" />
+
     <application
         android:label="App2"
         android:theme="@style/Theme.App2">
